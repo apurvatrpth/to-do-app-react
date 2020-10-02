@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import './App.css';
-import Todos from './components/todos' // import names have to be in capital fonts otherwise they won't work for some reason 
+import Header from './components/layout/header';
+import Todos from './components/todos/todos' // import names have to be in capital fonts otherwise they won't work for some reason 
+import AddToDo from './components/todos/addToDo'
+import uuid from 'uuid'
 
 class App extends Component{
   state = {
     todos: [
         {
-            id: 1,
+            id: uuid.v4(),
             title: "Take out the trash",
             completed: false
         },
         {
-            id: 2,
+            id: uuid.v4(),
             title: "Have lunch",
             completed: false
         },
         {
-            id: 3,
+            id: uuid.v4(),
             title: "Sleep",
             completed: false
         }
@@ -34,12 +37,30 @@ markComplete = (id) => {
   })
 }
 
+deleteToDo = (id) => {
+  this.setState({
+    todos: [...this.state.todos.filter(todo => todo.id !== id)]
+  })
+}
+
+addOneToDo = (title) => {
+  const newTodo = {
+    id: uuid.v4(),
+    title,
+    completed: false
+  }
+  this.setState({ todos: [...this.state.todos, newTodo]})
+}
+
 render() {
   return (
     <div className="App">
-      <h1 style= {{fontFamily: 'Courier New', color: '#008080'}}>To-Do List</h1>
-      <Todos todoProps  = {this.state.todos} markComplete={this.markComplete}/>
-    </div>
+      <div className='container'>
+      <Header />
+      <AddToDo addOneToDo={this.addOneToDo}/>
+      <Todos todoProps  = {this.state.todos} markComplete={this.markComplete} delToDo = {this.deleteToDo}/>
+      </div>
+      </div>
   );
 }
   //todoProps are props for Todos component, they can be accessed in todos.js as well

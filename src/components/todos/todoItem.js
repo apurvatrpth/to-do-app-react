@@ -5,7 +5,7 @@ export class TodoItem extends Component {
     setStyleFunc = () => {
         return {
             color: 'black',
-            background: '#DCDCDC',
+            background: '#98FB98',
             padding: '20px',
             textDecoration: this.props.todoItemProp.completed ? 'line-through': 'none',
             marginBottom: '10px',
@@ -22,7 +22,7 @@ export class TodoItem extends Component {
             <div style={this.setStyleFunc()}>
                 <input type='checkbox'  onChange={this.props.markComplete.bind(this, id)}/>
                 <p>{title}</p>
-                <button style={btnStyle}>X</button>
+                <button style={btnStyle} onClick ={this.props.deleteToDo.bind(this, id)}>X</button>
             </div>
         )
     }
