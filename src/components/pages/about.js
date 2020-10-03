@@ -4,7 +4,7 @@ export default function about() {
     return (
         <React.Fragment>
         <h1>About the application</h1>
-        <p style={styleText}>This is a simple to-do app made using only react-js<br/>
+        <p style={styleText}>This is a simple to-do app made using react-js and jsonplaceholder apis<br/>
            <br/>Author - Apurva Tripathi
         </p>
         </React.Fragment>
