@@ -49,8 +49,17 @@
   color: #fff;
   padding: 7px 20px;
   cursor: pointer;
+  margin-top: 30px;
+  margin-left: 50px;
+  margin-bottom: 30px;
 }
 
 .btn:hover {
   background: blue;
+}
+
+.addItem {
+  position: relative;
+  border: 3px solid springgreen;
+  padding: 4px
 }

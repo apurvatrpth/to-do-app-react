@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css';
 import Header from './components/layout/header';
 import Todos from './components/todos/todos' // import names have to be in capital fonts otherwise they won't work for some reason 
 import AddToDo from './components/todos/addToDo'
-import uuid from 'uuid'
+import * as uuid from 'uuid'
+import About from './components/pages/about'
 
 class App extends Component{
   state = {
@@ -54,13 +56,22 @@ addOneToDo = (title) => {
 
 render() {
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
       <div className='container'>
       <Header />
-      <AddToDo addOneToDo={this.addOneToDo}/>
-      <Todos todoProps  = {this.state.todos} markComplete={this.markComplete} delToDo = {this.deleteToDo}/>
+      <Route exact path='/' render={propp => (
+        <React.Fragment>
+            <AddToDo addOneToDo={this.addOneToDo}/>
+            <Todos todoProps  = {this.state.todos} markComplete={this.markComplete} delToDo = {this.deleteToDo}/>
+        </React.Fragment>
+      )}>
+      </Route>
+      <Route path='/about' component ={About}>
+      </Route>
       </div>
       </div>
+    </Router>
   );
 }
   //todoProps are props for Todos component, they can be accessed in todos.js as well
