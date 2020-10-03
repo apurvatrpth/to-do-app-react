@@ -4,29 +4,24 @@ import './App.css';
 import Header from './components/layout/header';
 import Todos from './components/todos/todos' // import names have to be in capital fonts otherwise they won't work for some reason 
 import AddToDo from './components/todos/addToDo'
-import * as uuid from 'uuid'
+// import * as uuid from 'uuid'
 import About from './components/pages/about'
+import axios from 'axios'
 
 class App extends Component{
   state = {
     todos: [
-        {
-            id: uuid.v4(),
-            title: "Take out the trash",
-            completed: false
-        },
-        {
-            id: uuid.v4(),
-            title: "Have lunch",
-            completed: false
-        },
-        {
-            id: uuid.v4(),
-            title: "Sleep",
-            completed: false
-        }
     ]
 }
+
+//to-do will be filled with json placeholder api
+
+componentDidMount() {
+  axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5').then(res => this.setState({todos: res.data}))
+}
+
+//axios requests return a promise
+// adding ?_limit=5 to the url limits the responses to just 5 in number
 
 markComplete = (id) => {
   this.setState({
@@ -40,18 +35,22 @@ markComplete = (id) => {
 }
 
 deleteToDo = (id) => {
-  this.setState({
+  axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res => this.setState({
     todos: [...this.state.todos.filter(todo => todo.id !== id)]
-  })
+  }))
 }
 
 addOneToDo = (title) => {
-  const newTodo = {
-    id: uuid.v4(),
+  // const newTodo = {
+  //   id: uuid.v4(),
+  //   title,
+  //   completed: false
+  // }
+
+  axios.post('https://jsonplaceholder.typicode.com/todos', {
     title,
     completed: false
-  }
-  this.setState({ todos: [...this.state.todos, newTodo]})
+  }).then(res => this.setState({ todos: [...this.state.todos, res.data]}))
 }
 
 render() {

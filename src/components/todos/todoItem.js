@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export class TodoItem extends Component {
 
@@ -35,6 +36,12 @@ const btnStyle = {
     padding: '5px 9px',
     borderRadius: '30%',
     cursor: 'pointer',
+}
+
+TodoItem.propTypes = {
+    todoItemProp: PropTypes.array.isRequired,
+    markComplete: PropTypes.func.isRequired,
+    deleteToDo: PropTypes.func.isRequired
 }
 
 
